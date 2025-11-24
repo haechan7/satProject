@@ -23,9 +23,9 @@ bool Renderer::init() {
 void Renderer::drawAxes() {
     SDL_SetRenderDrawColor(renderer, 150, 150, 150, 255);
 
-    // XÃà
+    // Xì¶•
     SDL_RenderDrawLine(renderer, 0, screenHeight / 2, screenWidth, screenHeight / 2);
-    // YÃà
+    // Yì¶•
     SDL_RenderDrawLine(renderer, screenWidth / 2, 0, screenWidth / 2, screenHeight);
 }
 
@@ -35,7 +35,7 @@ void Renderer::drawTicks() {
     int centerX = screenWidth / 2;
     int centerY = screenHeight / 2;
 
-    // XÃà ´«±Ý
+    // Xì¶• ëˆˆê¸ˆ
     for (int x = centerX; x < screenWidth; x += (int)scale) {
         SDL_RenderDrawLine(renderer, x, centerY - 5, x, centerY + 5);
     }
@@ -43,7 +43,7 @@ void Renderer::drawTicks() {
         SDL_RenderDrawLine(renderer, x, centerY - 5, x, centerY + 5);
     }
 
-    // YÃà ´«±Ý
+    // Yì¶• ëˆˆê¸ˆ
     for (int y = centerY; y < screenHeight; y += (int)scale) {
         SDL_RenderDrawLine(renderer, centerX - 5, y, centerX + 5, y);
     }

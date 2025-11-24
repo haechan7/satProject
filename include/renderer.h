@@ -8,7 +8,7 @@ private:
     SDL_Renderer* renderer;
     int screenWidth;
     int screenHeight;
-    double scale; // È®´ë/Ãà¼Ò °ª
+    double scale; // í™•ëŒ€/ì¶•ì†Œ ê°’
 
 public:
     Renderer(int width = 800, int height = 600, double scale = 50.0);

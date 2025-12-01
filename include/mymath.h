@@ -1,7 +1,10 @@
 #pragma once
-class myMath {
+class MyMath {
 public:
-	static double myPow(double base, int exp);
-	static double myFabs(double x);
-	static double mySqrt(double x); //
+	double myPow(double base, int exp);
+	double myFabs(double x);
+	double mySqrt(double x);
+	double mySin(double x);
+	double myCos(double x);
+	double myTan(double x);
 };

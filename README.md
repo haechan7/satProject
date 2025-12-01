@@ -39,6 +39,7 @@ src/
 ├── sinfunction.*
 ├── cosfunction.*
 └── tanfunction.*
+```
 
 ---
 

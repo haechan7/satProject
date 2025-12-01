@@ -27,17 +27,18 @@ SDL2 기반 C++ 그래프 시각화 프로그램
 
 ## 3. 프로그램 구조
 
+```text
 src/
-├─ main.cpp
-├─ renderer.* // 화면 그리기 및 이벤트 처리
-├─ mymath.* // 수학 유틸
-├─ function.* // 함수 인터페이스
-├─ functionfactory.* // 객체 생성
-├─ polynomialfunction.*
-├─ abspolynomialfunction.*
-├─ sinfunction.*
-├─ cosfunction.*
-└─ tanfunction.*
+├── main.cpp
+├── renderer.* // 화면 그리기 및 이벤트 처리
+├── mymath.* // 수학 유틸
+├── function.* // 함수 인터페이스
+├── functionfactory.* // 객체 생성
+├── polynomialfunction.*
+├── abspolynomialfunction.*
+├── sinfunction.*
+├── cosfunction.*
+└── tanfunction.*
 
 ---
 

@@ -24,7 +24,7 @@ double MyMath::mySin(double x) {
     // 테일러 급수를 사용한 사인 계산
     double term = x; // 첫 번째 항
     double sum = term;
-    for (int n = 1; n < 10; n++) {
+    for (int n = 1; n < 1000; n++) {
         term *= -x * x / ((2 * n) * (2 * n + 1));
         sum += term;
     }
@@ -34,7 +34,7 @@ double MyMath::myCos(double x) {
     // 테일러 급수를 사용한 코사인 계산
     double term = 1; // 첫 번째 항
     double sum = term;
-    for (int n = 1; n < 10; n++) {
+    for (int n = 1; n < 1000; n++) {
         term *= -x * x / ((2 * n - 1) * (2 * n));
         sum += term;
     }

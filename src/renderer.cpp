@@ -1,8 +1,10 @@
 #include "renderer.h"
 #include <iostream>
 
-Renderer::Renderer(int width, int height, double scale)
-    : window(nullptr), renderer(nullptr), screenWidth(width), screenHeight(height), scale(scale) {
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
+Renderer::Renderer(double scale)
+    : window(nullptr), renderer(nullptr), scale(scale) {
 }
 
 bool Renderer::init() {
@@ -10,7 +12,7 @@ bool Renderer::init() {
 
     window = SDL_CreateWindow("Function Grapher",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        screenWidth, screenHeight, SDL_WINDOW_SHOWN);
+        SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
@@ -23,50 +25,44 @@ bool Renderer::init() {
 void Renderer::drawAxes() {
     SDL_SetRenderDrawColor(renderer, 150, 150, 150, 255);
 
-    // Xì¶•
-    SDL_RenderDrawLine(renderer, 0, screenHeight / 2, screenWidth, screenHeight / 2);
-    // Yì¶•
-    SDL_RenderDrawLine(renderer, screenWidth / 2, 0, screenWidth / 2, screenHeight);
+    // XÃà
+    SDL_RenderDrawLine(renderer, 0, SCREEN_HEIGHT / 2, SCREEN_WIDTH, SCREEN_HEIGHT / 2);
+    // YÃà
+    SDL_RenderDrawLine(renderer, SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2, SCREEN_HEIGHT);
 }
 
 void Renderer::drawTicks() {
     SDL_SetRenderDrawColor(renderer, 180, 180, 180, 255);
 
-    int centerX = screenWidth / 2;
-    int centerY = screenHeight / 2;
+    int centerX = SCREEN_WIDTH / 2;
+    int centerY = SCREEN_HEIGHT / 2;
 
-    // Xì¶• ëˆˆê¸ˆ
-    for (int x = centerX; x < screenWidth; x += (int)scale) {
+    // XÃà ´«±Ý
+    for (int x = centerX; x < SCREEN_WIDTH; x += (int)scale) {
         SDL_RenderDrawLine(renderer, x, centerY - 5, x, centerY + 5);
     }
-    for (int x = centerX; x > 0; x -= (int)scale) {
+    for (int x = centerX; x > 0; x -= scale) {
         SDL_RenderDrawLine(renderer, x, centerY - 5, x, centerY + 5);
     }
 
-    // Yì¶• ëˆˆê¸ˆ
-    for (int y = centerY; y < screenHeight; y += (int)scale) {
+    // YÃà ´«±Ý
+    for (int y = centerY; y < SCREEN_HEIGHT; y += (int)scale) {
         SDL_RenderDrawLine(renderer, centerX - 5, y, centerX + 5, y);
     }
-    for (int y = centerY; y > 0; y -= (int)scale) {
+    for (int y = centerY; y > 0; y -= scale) {
         SDL_RenderDrawLine(renderer, centerX - 5, y, centerX + 5, y);
     }
 }
 
-void Renderer::drawFunction(int* coeffs, int count, int choice, myMath& math) {
+void Renderer::plot(Function *func) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
-    for (int px = 0; px < screenWidth; px++) {
-        double x = (px - screenWidth / 2.0) / scale;
-        double sum = 0;
+    for (int px = 0; px < SCREEN_WIDTH; px++) {
+        double x = (px - SCREEN_WIDTH / 2.0) / scale;
+		double y = func->evaluate(x);
+        int py = SCREEN_HEIGHT / 2 - (int)(y * (scale));
 
-        for (int j = count - 1; j >= 0; j--) {
-            double value = (choice == 2) ? math.myFabs(x) : x;
-            sum += coeffs[-j + count - 1] * math.myPow(value, j);
-        }
-
-        int py = screenHeight / 2 - (int)(sum * scale);
-
-        if (py >= 0 && py < screenHeight)
+        if (py >= 0 && py < SCREEN_HEIGHT)
             SDL_RenderDrawPoint(renderer, px, py);
     }
 }

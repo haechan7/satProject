@@ -1,21 +1,19 @@
 #pragma once
-#include <SDL.h>
+#include "SDL.h"
 #include "mymath.h"
-
+#include "function.h"
 class Renderer {
 private:
     SDL_Window* window;
     SDL_Renderer* renderer;
-    int screenWidth;
-    int screenHeight;
-    double scale; // í™•ëŒ€/ì¶•ì†Œ ê°’
+    double scale; // È®´ë/Ãà¼Ò °ª
 
 public:
-    Renderer(int width = 800, int height = 600, double scale = 50.0);
+    Renderer(double scale = 50.0);
     bool init();
     void drawAxes();
     void drawTicks();
-    void drawFunction(int* coeffs, int count, int choice, myMath& math);
+    void plot(Function *func);
     void present();
     void wait();
     void cleanup();
